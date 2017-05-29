@@ -112,6 +112,7 @@ void fit_mj_single_MC(RooWorkspace* workspace, const std::string & fileName, con
 // method to do fail and pass fit for the scale factor evaluation                                                                                                                      
 void ScaleFactorTTbarControlSampleFit(RooWorkspace* workspace, std::map<std::string,std::string > mj_shape, std::map<std::string,int> color_palet, std::vector<std::string>* constraintlist_data, std::vector<std::string>* constraintlist_MC, const std::string & label, const std::string & channel, const std::string & wtagger, const double & ca8_ungroomed_pt_min, const double & ca8_ungroomed_pt_max){
   
+  //TODO! Add method to calculate tt SF on the go!!!
   
   float ttSF = 0.667028210351; // powheg80X
 
