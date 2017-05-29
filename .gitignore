@@ -1,3 +1,6 @@
+*.d
+*.so
+*.pyc
 *.txt
 *.pdf
 *.png
