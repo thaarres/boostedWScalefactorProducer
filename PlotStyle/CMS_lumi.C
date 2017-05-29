@@ -4,8 +4,6 @@
 void 
 CMS_lumi( TPad* pad, int iPeriod, int iPosX )
 {            
-  
-  std::cout<< "IN CMS LUMI!!" << std::endl;
   bool outOfFrame    = false;
   if( iPosX/10==0 ) 
     {
