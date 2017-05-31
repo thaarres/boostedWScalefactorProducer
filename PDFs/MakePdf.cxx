@@ -118,62 +118,10 @@ RooAbsPdf* get_General_mj_Model(RooWorkspace* workspace, const std::string & lab
       param = dynamic_cast<RooRealVar*>(par.Next());
     }
   }
-
   return model_General;
 }
 
 ////////////////////////////////////////////
-
-RooAbsPdf* get_TTbar_mj_Model  (RooWorkspace* workspace, const std::string & label, const std::string & model, const std::string & channel, const int & fix){
-  
-  return get_General_mj_Model(workspace,label,model,channel,fix);
-}
-
-////////////////////////////////////////////
-
-RooAbsPdf* get_STop_mj_Model  (RooWorkspace* workspace, const std::string & label, const std::string & model, const std::string & channel, const int & fix){
-  
-  return get_General_mj_Model(workspace,label,model,channel,fix);
-}
-
-RooAbsPdf* get_VV_mj_Model  (RooWorkspace* workspace, const std::string & label, const std::string & model, const std::string & channel, const int & fix){
-
-  std::cout<<"########### Fixing VV mj model ############"<<std::endl;
-  return get_General_mj_Model(workspace,label,model,channel,fix);
-}
- 
-
-RooAbsPdf* get_WJets_mj_Model  (RooWorkspace* workspace, const std::string & label, const std::string & model, const std::string & channel, const int & fix, const std::string & jetBin){
-
-  std::cout<<"########### Fixing WJets mj model ############"<<std::endl;
-  if(jetBin == "_2jet") return get_General_mj_Model(workspace,label,model,channel,fix);
-  else{
-    
-    TString name ;
-    if(TString(workspace->GetName()).Contains("4bias")) name.Form("rdataset4bias%s_%s_mj",label.c_str(),channel.c_str());
-    else if (TString(workspace->GetName()).Contains("4fit")) name.Form("rdataset%s_%s_mj",label.c_str(),channel.c_str());
-    else name.Form("rdataset%s_%s_mj",label.c_str(),channel.c_str());
-
-    RooDataSet* rdataset_WJets_mj = (RooDataSet*) workspace->data(name.Data());
-    // rdataset_WJets_mj->Print();
-    RooAbsPdf* model_WJets = get_mj_Model(workspace,label+model,channel);
-    // model_WJets->Print();
-    RooArgSet* parameters_WJets = model_WJets->getParameters(*rdataset_WJets_mj);
-    TIter par = parameters_WJets->createIterator(); par.Reset();
-    RooRealVar* param = dynamic_cast<RooRealVar*>(par.Next());
-    while (param){
-      TString paraName; paraName = Form("%s",param->GetName());
-      if (paraName.Contains("rrv_width_ErfExp_WJets") or paraName.Contains("rrv_offset_ErfExp_WJets") or paraName.Contains("rrv_p1_User1_WJets")){
-        param->setConstant(kTRUE);
-      }
-      param =  dynamic_cast<RooRealVar*>(par.Next());
-    }
-    return model_WJets ;
-  }       
-   
-}
-
-/////////////////////////////////////////
 
 RooAbsPdf* MakeGeneralPdf(RooWorkspace* workspace, const std::string & label, const std::string & model, const std::string & spectrum, const std::string & wtagger_label, const std::string & channel, std::vector<std::string>* constraint, const int & ismc){
   
