@@ -8,15 +8,15 @@ Source ROOT version 5.34/36 independently (currently no CMSSW version with ROOT 
 source /swshare/ROOT/root_v5.34.32_precompiled/root/bin/thisroot.sh
 ```
 ### getting the code
-Fork your own version of the code from https://github.com/cms-jet/boostedWScalefactorProducer/
+Fork your own version of the code from https://github.com/thaares/boostedWScalefactorProducer/
 ```
 export GITUSER=`git config user.github`
 echo "Your github username has been set to \"$GITUSER\""
 git clone git@github.com:${GITUSER}/boostedWScalefactorProducer.git
 cd boostedWScalefactorProducer
-git remote add originalRemote git@github.com:cms-jet/boostedWScalefactorProducer.git
+git remote add originalRemote git@github.com:thaarres/boostedWScalefactorProducer.git
 git fetch originalRemote
-git checkout -b DevelopmentBranch cms-jet/90X
+git checkout -b DevelopmentBranch thaarres/80X
 export ROOFITSYS=$ROOTSYS
 python Automatic_Setup.py --vclean 1
 ```
